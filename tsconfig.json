@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "target": "ES5",
+    "module": "commonjs",
+    "experimentalDecorators": true,
+    "outDir": "./Resources",
+    "rootDir": "./src/Resources",
+    "declaration": false,
+    "inlineSourceMap": false,
+    "removeComments": true,
+    "noLib": false,
+    "sourceMap": true,
+    "preserveConstEnums": true,
+    "suppressImplicitAnyIndexErrors": true
+  },
+  "filesGlob": [
+    "!node_modules/**",
+    "!build/**",
+    "src/**/*.ts",
+    "typings/**/*.ts"
+  ],
+  "files": [
+    "src/Resources/Scripts/main.ts",
+
+    "src/Resources/Components/SpaceGame/Graphics/Background.ts",
+    "src/Resources/Components/SpaceGame/Graphics/Explosion.ts",
+    "src/Resources/Components/SpaceGame/Characters/Player.ts",
+
+    "src/Resources/Components/SpinnerGame/Spinner.ts",
+
+    "typings/Atomic/Atomic.d.ts"
+  ],
+  "atom": {
+    "rewriteTsconfig": true
+  }
+}

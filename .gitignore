@@ -1,0 +1,12 @@
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+# Created by .ignore support plugin (hsz.mobi)
+Cache
+build
+
+src/Resources/**/*.asset
+src/Resources/**/*.js
+src/Resources/**/*.js.map
