@@ -1,0 +1,1 @@
+{"version":3,"file":"Console.js","sourceRoot":"","sources":["../../../src/Resources/Modules/Atomic/Console.ts"],"names":[],"mappings":";AAAA;IAAA;IAYA,CAAC;IALQ,aAAK,GAAZ,UAAa,OAAc;QACzB,EAAE,CAAC,CAAC,OAAO,CAAC,KAAK,CAAC,CAAC,CAAC;YAClB,MAAM,CAAC,KAAK,CAAC,OAAO,CAAC,CAAC;QACxB,CAAC;IACH,CAAC;IAVa,aAAK,GAAW,KAAK,CAAC;IAWtC,cAAC;AAAD,CAAC,AAZD,IAYC;AAED;kBAAe,OAAO,CAAC"}
