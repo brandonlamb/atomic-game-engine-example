@@ -1,14 +1,8 @@
-# Sections
-
-- [Intro](Intro)
-- [Components](Components)
-- [Modules](Modules)
-
-## Intro
+# Intro
 
 The files in the `Resources` directory (JavaScript, *.js, *.js.map) are the generated/compiled files from TypeScript, located in `src/Resources`. These are included for people that maybe just want to see an example without having to compile TypeScript.
 
-## Components
+# Components
 
 Components are located and loaded from the `Resources/Components` directory. Like modules, it is a good idea to organize these with sub-directories.
 
@@ -60,11 +54,11 @@ class Enemy extends Atomic.JSComponent {
 export = Enemy;
 ````
 
-## Modules
+# Modules
 
 Modules are loaded out of the `Resources/Modules` directory. It can be a good idea to break this up by sub-modules just like you would organize Java/other code.
 
-### TypeScript import/export
+## TypeScript import/export
 
 ```typescript
 import Test from './Test';
