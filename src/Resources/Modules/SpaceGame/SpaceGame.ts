@@ -105,10 +105,11 @@ class SpaceGame extends Generic2DGame {
     this.halfHeight = this.graphics.height * Atomic.PIXEL_SIZE;
 
     // this.graphics.toggleFullscreen();
-    // this.graphics.maximize();
+    this.graphics.maximize();
     // this.graphics.setWindowSize(this.config.width, this.config.height);
-    let size = this.graphics.getMonitorResolution(0);
-    this.graphics.setWindowSize(size[0] / 1.25, size[1] / 1.25);
+
+    // let size = this.graphics.getMonitorResolution(0);
+    // this.graphics.setWindowSize(size[0] / 1.25, size[1] / 1.25);
 
     // this.graphics.centerWindow();
     // this.graphics.setWindowPosition(0, 0);

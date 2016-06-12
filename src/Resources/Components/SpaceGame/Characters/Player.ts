@@ -137,12 +137,12 @@ class Player extends Atomic.JSComponent {
 
     if (left) {
       pos[0] -= speed;
-      // camera.translate2D([-Atomic.PIXEL_SIZE, 0]);
+      camera.translate2D([-Atomic.PIXEL_SIZE, 0]);
     }
 
     if (right) {
       pos[0] += speed;
-      // camera.translate2D([Atomic.PIXEL_SIZE, 0]);
+      camera.translate2D([Atomic.PIXEL_SIZE, 0]);
     }
 
     if (pos[0] < -this.game.halfWidth + 1) {
@@ -155,7 +155,9 @@ class Player extends Atomic.JSComponent {
 
     // this.node.position2D = pos;
     this.node.setPosition2D(pos);
-    camera.setPosition2D(pos);
+
+    // pos.y += -0.1;
+    // camera.setPosition2D(pos);
 
     // let pos1:Atomic.Vector2 = camera.getWorldPosition2D();
     // let pos2:Atomic.Vector2 = camera.getPosition2D();

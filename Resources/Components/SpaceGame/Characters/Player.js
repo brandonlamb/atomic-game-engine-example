@@ -91,9 +91,11 @@ var Player = (function (_super) {
         var jump = i.getKeyDown(Atomic.KEY_UP) || i.getKeyDown(Atomic.KEY_SPACE) || i.getKeyDown(Atomic.KEY_W);
         if (left) {
             pos[0] -= speed;
+            camera.translate2D([-Atomic.PIXEL_SIZE, 0]);
         }
         if (right) {
             pos[0] += speed;
+            camera.translate2D([Atomic.PIXEL_SIZE, 0]);
         }
         if (pos[0] < -this.game.halfWidth + 1) {
             pos[0] = -this.game.halfWidth + 2;
@@ -102,7 +104,6 @@ var Player = (function (_super) {
             pos[0] = this.game.halfWidth - 2;
         }
         this.node.setPosition2D(pos);
-        camera.setPosition2D(pos);
     };
     Player.prototype.update = function (timeStep) {
         if (this.allowShoot) {
