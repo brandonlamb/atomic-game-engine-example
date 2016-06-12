@@ -34,7 +34,7 @@ var Debug = (function (_super) {
     };
     Debug.prototype.update = function (timeStep) {
         var player = this.game.scene.getChild('Player');
-        var camera = player.getChild('Camera').getComponent('Camera');
+        var camera = this.game.camera;
         var cameraPos = camera.node.getPosition2D();
         var playerPos = player.getPosition2D();
         var rot = player.getRotation2D();

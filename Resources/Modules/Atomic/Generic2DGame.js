@@ -38,7 +38,7 @@ var Generic2DGame = (function () {
         if (typeof (filename) == 'string') {
             this.debug('Generic2DGame.createScene2D(): load=' + filename);
             scene.loadXML(filename);
-            cameraNode = scene.getChild('Player').getChild('Camera');
+            cameraNode = scene.getChild('Camera');
             camera = cameraNode.getComponent('Camera');
         }
         else {

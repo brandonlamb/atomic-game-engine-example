@@ -22,7 +22,7 @@ var Player = (function (_super) {
         this.shootDelta = 0;
         this.delta = 0;
         this.allowMove = true;
-        this.allowShoot = true;
+        this.allowShoot = false;
         this.health = 10;
         this.armor = 10;
     }
@@ -108,17 +108,27 @@ var Player = (function (_super) {
             var levelY = config.levelHeight * Atomic.PIXEL_SIZE;
             var x = pos[0] + speed * Math.cos(rot * Math.PI / 180);
             var y = pos[1] + speed * Math.sin(rot * Math.PI / 180);
-            var camX = pos2[0] + speed * Math.cos(rot * Math.PI / 180);
-            var camY = pos2[1] + Math.sin(rot * Math.PI / 180);
             if (x >= -levelX && x <= levelX) {
                 pos[0] = x;
             }
             if (y >= -levelY && y <= levelY) {
                 pos[1] = y;
             }
-            Atomic.print("\nCAMX=" + camX + "\nCAMY=" + camY + "\nPOSX=" + pos[0] + "\nPOSY=" + pos[1]);
         }
-        this.node.setPosition2D(pos);
+        if (down) {
+            var levelX = config.levelWidth * Atomic.PIXEL_SIZE;
+            var levelY = config.levelHeight * Atomic.PIXEL_SIZE;
+            var x = pos[0] - speed * Math.cos(rot * Math.PI / 180);
+            var y = pos[1] - speed * Math.sin(rot * Math.PI / 180);
+            if (x >= -levelX && x <= levelX) {
+                pos[0] = x;
+            }
+            if (y >= -levelY && y <= levelY) {
+                pos[1] = y;
+            }
+        }
+        this.node.position2D = pos;
+        cameraNode.position2D = pos;
     };
     Player.prototype.update = function (timeStep) {
         if (this.allowShoot) {

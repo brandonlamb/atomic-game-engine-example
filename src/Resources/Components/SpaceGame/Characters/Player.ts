@@ -23,7 +23,7 @@ class Player extends Atomic.JSComponent {
   // private lastUpdate:number;
 
   allowMove:boolean = true;
-  allowShoot:boolean = true;
+  allowShoot:boolean = false;
   health:number = 10;
   armor:number = 10;
 
@@ -184,13 +184,13 @@ class Player extends Atomic.JSComponent {
       let x = pos[0] + speed * Math.cos(rot * Math.PI / 180);
       let y = pos[1] + speed * Math.sin(rot * Math.PI / 180);
 
-      let camX = pos2[0] + speed * Math.cos(rot * Math.PI / 180);
-      let camY = pos2[1] + Math.sin(rot * Math.PI / 180);
+      // let camX = pos2[0] + speed * Math.cos(rot * Math.PI / 180);
+      // let camY = pos2[1] + Math.sin(rot * Math.PI / 180);
 
       if (x >= -levelX && x <= levelX) {
         pos[0] = x;
-        // camera.translate2D([camX, 0]);
-        // cameraNode.setPosition2D([camX, cameraNode.getPosition2D()[1]]);
+        // cameraNode.translate2D([pos[0], pos[1] - 0.9893]);
+        // cameraNode.setPosition2D([pos[0], pos[1] - 0.9893]);
         // cameraNode.setPosition2D([camX / 2, 0]);
         // camera.setZoom(1);
       }
@@ -209,16 +209,36 @@ class Player extends Atomic.JSComponent {
       // let viewport:Atomic.Viewport = this.game.viewport;
       // let camX = this.clamp(-pos[0] + viewport.getWidth() / 2, -levelX, levelX - viewport.getWidth());
       // let camY = this.clamp(-pos[1] + viewport.getHeight() / 2, -levelY, levelY - viewport.getHeight());
-      Atomic.print(`\nCAMX=${camX}\nCAMY=${camY}\nPOSX=${pos[0]}\nPOSY=${pos[1]}`);
+      // Atomic.print(`\nCAMX=${camX}\nCAMY=${camY}\nPOSX=${pos[0]}\nPOSY=${pos[1]}`);
 
       // camera.setPosition2D([-camX, camY]);
       // camera.translate2D(camX, camY);
       // camera.translate2D(pos[0] * Atomic.PIXEL_SIZE, 0);
     }
 
+    // Up for thrust
+    if (down) {
+      let levelX = config.levelWidth * Atomic.PIXEL_SIZE;
+      let levelY = config.levelHeight * Atomic.PIXEL_SIZE;
+      let x = pos[0] - speed * Math.cos(rot * Math.PI / 180);
+      let y = pos[1] - speed * Math.sin(rot * Math.PI / 180);
+
+      if (x >= -levelX && x <= levelX) {
+        pos[0] = x;
+      }
+
+      if (y >= -levelY && y <= levelY) {
+        pos[1] = y;
+      }
+    }
+
     // this.node.position2D = pos;
-    this.node.setPosition2D(pos);
+    // this.node.setPosition2D(pos);
+    this.node.position2D = pos;
     // this.node.translate2D(pos);
+    // cameraNode.position = this.node.position;
+    // cameraNode.setPosition2D(pos);
+    cameraNode.position2D = pos;
 
     // pos.y += -0.1;
     // camera.setPosition2D(pos);

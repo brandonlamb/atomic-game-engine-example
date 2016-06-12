@@ -44,12 +44,13 @@ class Debug extends Atomic.JSComponent {
   }
 
   update(timeStep:number):void {
-    let player:Atomic.Node = this.game.scene.getChild('Player');
-    let camera:Atomic.Camera = <Atomic.Camera>player.getChild('Camera').getComponent('Camera');
-    let cameraPos:Atomic.Vector2 = camera.node.getPosition2D();
+    let player = this.game.scene.getChild('Player');
+    // let camera:Atomic.Camera = <Atomic.Camera>player.getChild('Camera').getComponent('Camera');
+    let camera = <Atomic.Camera>this.game.camera;
+    let cameraPos = camera.node.getPosition2D();
 
-    let playerPos:Atomic.Vector2 = player.getPosition2D();
-    let rot:number = player.getRotation2D();
+    let playerPos = player.getPosition2D();
+    let rot = player.getRotation2D();
 
     this.text.text = `CAMERA: ${cameraPos}\n`
       + `CAMERA ZOOM: ${camera.getZoom()}\n`
