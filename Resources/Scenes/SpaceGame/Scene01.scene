@@ -5,8 +5,8 @@
 	<attribute name="Smoothing Constant" value="50" />
 	<attribute name="Snap Threshold" value="5" />
 	<attribute name="Elapsed Time" value="0" />
-	<attribute name="Next Replicated Node ID" value="379" />
-	<attribute name="Next Replicated Component ID" value="2000" />
+	<attribute name="Next Replicated Node ID" value="382" />
+	<attribute name="Next Replicated Component ID" value="2003" />
 	<attribute name="Next Local Node ID" value="16778496" />
 	<attribute name="Next Local Component ID" value="16777216" />
 	<attribute name="Variables" />
@@ -15,6 +15,9 @@
 	<component type="Octree" id="2" />
 	<component type="DebugRenderer" id="3" />
 	<component type="Renderer2D" id="1976" />
+	<component type="JSComponent" id="2002">
+		<attribute name="ComponentFile" value="JSComponentFile;Components/SpaceGame/Graphics/HUD/Debug.js" />
+	</component>
 	<node id="2">
 		<attribute name="Is Enabled" value="true" />
 		<attribute name="Name" value="Zone" />

@@ -41,7 +41,7 @@ var SpaceGame = (function (_super) {
         _super.prototype.start.call(this);
         this.halfWidth = this.graphics.width * Atomic.PIXEL_SIZE;
         this.halfHeight = this.graphics.height * Atomic.PIXEL_SIZE;
-        this.graphics.maximize();
+        this.graphics.setWindowSize(this.config.width, this.config.height);
         this.stateManager.add('Boot', new BootState_1.default());
         this.stateManager.add('Preload', new PreloadState_1.default());
         this.stateManager.add('MainMenu', new MainMenuState_1.default());

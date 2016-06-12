@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+  <regions>
+    <region id="Region01">
+      <zones>
+        <zone id="Zone01">
+          <areas>
+            <area id="Area01">
+              <width>8096</width>
+              <height>8096</height>
+            </area>
+          </areas>
+        </zone>
+      </zones>
+    </region>
+  </regions>
+</root>

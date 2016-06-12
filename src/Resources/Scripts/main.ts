@@ -10,7 +10,9 @@ const bootstrap = new Bootstrap(
     blackAndWhite: false,
     blur: false,
     debug: false,
-    music: false
+    music: false,
+    levelWidth: 8096,
+    levelHeight: 8096
   }
 );
 bootstrap.init();

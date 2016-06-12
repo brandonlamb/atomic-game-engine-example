@@ -1,0 +1,19 @@
+{
+  "regions": [
+    {
+      "id": "Region01",
+      "zones": [
+        {
+          "id": "Zone01",
+          "areas": [
+            {
+              "id": "Area01",
+              "width": 8096,
+              "height": 8096
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

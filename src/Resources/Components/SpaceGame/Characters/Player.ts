@@ -3,6 +3,7 @@ import Vector2 = Atomic.Vector2;
 
 import SpaceGame from "../../../Modules/SpaceGame/SpaceGame";
 import Console from "../../../Modules/Atomic/Console";
+import GameConfig from "../../../Modules/Atomic/GameConfig";
 
 class Player extends Atomic.JSComponent {
   inspectionFields = {
@@ -124,11 +125,14 @@ class Player extends Atomic.JSComponent {
   }
 
   moveShip(timeStep:number):void {
+    let config:GameConfig = this.game.config;
     let camera:Atomic.Node = this.game.camera.node;
     let speed = 2.0 * timeStep;
     // let pos = this.node.position2D;
     let prevPos = this.node.getPosition2D();
     let pos:Atomic.Vector2 = [prevPos[0], prevPos[1]];
+    let rightPos:number;
+    let leftPos:number;
 
     const i:Atomic.Input = this.input;
     let left = i.getKeyDown(Atomic.KEY_LEFT) || i.getKeyDown(Atomic.KEY_A);
@@ -136,21 +140,21 @@ class Player extends Atomic.JSComponent {
     let jump = i.getKeyDown(Atomic.KEY_UP) || i.getKeyDown(Atomic.KEY_SPACE) || i.getKeyDown(Atomic.KEY_W);
 
     if (left) {
-      pos[0] -= speed;
-      camera.translate2D([-Atomic.PIXEL_SIZE, 0]);
+      leftPos = pos[0] - speed;
+      // if (leftPos >= -this.game.halfWidth + 1) {
+      if (leftPos >= -config.levelWidth) {
+        pos[0] = leftPos;
+        camera.translate2D([-Atomic.PIXEL_SIZE, 0]);
+      }
     }
 
     if (right) {
-      pos[0] += speed;
-      camera.translate2D([Atomic.PIXEL_SIZE, 0]);
-    }
-
-    if (pos[0] < -this.game.halfWidth + 1) {
-      pos[0] = -this.game.halfWidth + 2;
-    }
-
-    if (pos[0] > this.game.halfWidth - 1) {
-      pos[0] = this.game.halfWidth - 2;
+      rightPos = pos[0] + speed;
+      // if (rightPos <= this.game.halfWidth - 1) {
+      if (leftPos <= config.levelWidth) {
+        pos[0] = rightPos;
+        camera.translate2D([Atomic.PIXEL_SIZE, 0]);
+      }
     }
 
     // this.node.position2D = pos;

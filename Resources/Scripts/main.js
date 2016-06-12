@@ -8,7 +8,9 @@ var bootstrap = new Bootstrap_1.default({
     blackAndWhite: false,
     blur: false,
     debug: false,
-    music: false
+    music: false,
+    levelWidth: 8096,
+    levelHeight: 8096
 });
 bootstrap.init();
 bootstrap.start();

@@ -26,6 +26,7 @@
     "src/Resources/Components/SpaceGame/Graphics/Background.ts",
     "src/Resources/Components/SpaceGame/Graphics/Explosion.ts",
     "src/Resources/Components/SpaceGame/Characters/Player.ts",
+    "src/Resources/Components/SpaceGame/Graphics/HUD/Debug.ts",
 
     "src/Resources/Components/SpinnerGame/Spinner.ts",
 

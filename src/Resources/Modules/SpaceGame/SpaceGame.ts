@@ -4,6 +4,7 @@ import LocalStorage from "../Atomic/Persistence/LocalStorage";
 import BootState from "./States/BootState";
 import PreloadState from "./States/PreloadState";
 import MainMenuState from "./States/MainMenuState";
+import XMLFile = Atomic.XMLFile;
 
 /**
  * @class SpaceGame
@@ -105,8 +106,8 @@ class SpaceGame extends Generic2DGame {
     this.halfHeight = this.graphics.height * Atomic.PIXEL_SIZE;
 
     // this.graphics.toggleFullscreen();
-    this.graphics.maximize();
-    // this.graphics.setWindowSize(this.config.width, this.config.height);
+    // this.graphics.maximize();
+    this.graphics.setWindowSize(this.config.width, this.config.height);
 
     // let size = this.graphics.getMonitorResolution(0);
     // this.graphics.setWindowSize(size[0] / 1.25, size[1] / 1.25);

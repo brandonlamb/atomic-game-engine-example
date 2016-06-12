@@ -81,27 +81,30 @@ var Player = (function (_super) {
         pos[1] += .5;
     };
     Player.prototype.moveShip = function (timeStep) {
+        var config = this.game.config;
         var camera = this.game.camera.node;
         var speed = 2.0 * timeStep;
         var prevPos = this.node.getPosition2D();
         var pos = [prevPos[0], prevPos[1]];
+        var rightPos;
+        var leftPos;
         var i = this.input;
         var left = i.getKeyDown(Atomic.KEY_LEFT) || i.getKeyDown(Atomic.KEY_A);
         var right = i.getKeyDown(Atomic.KEY_RIGHT) || i.getKeyDown(Atomic.KEY_D);
         var jump = i.getKeyDown(Atomic.KEY_UP) || i.getKeyDown(Atomic.KEY_SPACE) || i.getKeyDown(Atomic.KEY_W);
         if (left) {
-            pos[0] -= speed;
-            camera.translate2D([-Atomic.PIXEL_SIZE, 0]);
+            leftPos = pos[0] - speed;
+            if (leftPos >= -config.levelWidth) {
+                pos[0] = leftPos;
+                camera.translate2D([-Atomic.PIXEL_SIZE, 0]);
+            }
         }
         if (right) {
-            pos[0] += speed;
-            camera.translate2D([Atomic.PIXEL_SIZE, 0]);
-        }
-        if (pos[0] < -this.game.halfWidth + 1) {
-            pos[0] = -this.game.halfWidth + 2;
-        }
-        if (pos[0] > this.game.halfWidth - 1) {
-            pos[0] = this.game.halfWidth - 2;
+            rightPos = pos[0] + speed;
+            if (leftPos <= config.levelWidth) {
+                pos[0] = rightPos;
+                camera.translate2D([Atomic.PIXEL_SIZE, 0]);
+            }
         }
         this.node.setPosition2D(pos);
     };
