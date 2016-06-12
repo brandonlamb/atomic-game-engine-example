@@ -117,11 +117,11 @@ class Player extends Atomic.JSComponent {
     this.shootDelta = 0.15;
 
     let pos = this.node.position2D;
-    pos[1] += .5;
+    pos[1] += 0.5;
 
     Atomic.print('SHOOT');
 
-    // SpaceGame.spawnBullet(pos, true);
+    this.spawnBullet(pos, true);
   }
 
   moveShip(timeStep:number):void {
@@ -131,7 +131,7 @@ class Player extends Atomic.JSComponent {
     let speed = 2.0 * timeStep;
     let rotationSpeed = 0.4;
     let pos = this.node.position2D;
-    let rot = this.node.getRotation2D();
+    let rot = this.node.rotation2D;
 
     const i = this.input;
     let left = i.getKeyDown(Atomic.KEY_LEFT) || i.getKeyDown(Atomic.KEY_A);
@@ -223,6 +223,12 @@ class Player extends Atomic.JSComponent {
     if (zoomOut) {
       camera.zoom -= timeStep;
     }
+  }
+
+  private spawnBullet(pos:Atomic.Vector2, isPlayer:boolean):void {
+    let bulletNode = this.game.scene.createChild('Bullet');
+    let bullet = bulletNode.createJSComponent('Components/SpaceGame/Bullet.js');
+    bullet.init(isPlayer, pos, this.node.rotation2D);
   }
 }
 

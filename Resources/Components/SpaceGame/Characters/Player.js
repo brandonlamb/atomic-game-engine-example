@@ -81,8 +81,9 @@ var Player = (function (_super) {
         }
         this.shootDelta = 0.15;
         var pos = this.node.position2D;
-        pos[1] += .5;
+        pos[1] += 0.5;
         Atomic.print('SHOOT');
+        this.spawnBullet(pos, true);
     };
     Player.prototype.moveShip = function (timeStep) {
         var config = this.game.config;
@@ -91,7 +92,7 @@ var Player = (function (_super) {
         var speed = 2.0 * timeStep;
         var rotationSpeed = 0.4;
         var pos = this.node.position2D;
-        var rot = this.node.getRotation2D();
+        var rot = this.node.rotation2D;
         var i = this.input;
         var left = i.getKeyDown(Atomic.KEY_LEFT) || i.getKeyDown(Atomic.KEY_A);
         var right = i.getKeyDown(Atomic.KEY_RIGHT) || i.getKeyDown(Atomic.KEY_D);
@@ -153,6 +154,11 @@ var Player = (function (_super) {
         if (zoomOut) {
             camera.zoom -= timeStep;
         }
+    };
+    Player.prototype.spawnBullet = function (pos, isPlayer) {
+        var bulletNode = this.game.scene.createChild('Bullet');
+        var bullet = bulletNode.createJSComponent('Components/SpaceGame/Bullet.js');
+        bullet.init(isPlayer, pos, this.node.rotation2D);
     };
     return Player;
 }(Atomic.JSComponent));

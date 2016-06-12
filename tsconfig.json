@@ -23,6 +23,7 @@
   "files": [
     "src/Resources/Scripts/main.ts",
 
+    "src/Resources/Components/SpaceGame/Bullet.ts",
     "src/Resources/Components/SpaceGame/Graphics/Background.ts",
     "src/Resources/Components/SpaceGame/Graphics/Explosion.ts",
     "src/Resources/Components/SpaceGame/Characters/Player.ts",
