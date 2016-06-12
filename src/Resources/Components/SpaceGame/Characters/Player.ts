@@ -127,22 +127,27 @@ class Player extends Atomic.JSComponent {
   moveShip(timeStep:number):void {
     let config:GameConfig = this.game.config;
     let camera:Atomic.Node = this.game.camera.node;
-    let speed = 2.0 * timeStep;
-    // let pos = this.node.position2D;
-    let prevPos = this.node.getPosition2D();
-    let pos:Atomic.Vector2 = [prevPos[0], prevPos[1]];
+    let speed:number = 2.0 * timeStep;
+    let rotationSpeed:number = 0.4;
+    let pos:Atomic.Vector2 = this.node.position2D;
+    let rot:number = this.node.getRotation2D();
     let rightPos:number;
     let leftPos:number;
 
     const i:Atomic.Input = this.input;
-    let left = i.getKeyDown(Atomic.KEY_LEFT) || i.getKeyDown(Atomic.KEY_A);
-    let right = i.getKeyDown(Atomic.KEY_RIGHT) || i.getKeyDown(Atomic.KEY_D);
-    let jump = i.getKeyDown(Atomic.KEY_UP) || i.getKeyDown(Atomic.KEY_SPACE) || i.getKeyDown(Atomic.KEY_W);
+    let left:boolean = i.getKeyDown(Atomic.KEY_LEFT) || i.getKeyDown(Atomic.KEY_A);
+    let right:boolean = i.getKeyDown(Atomic.KEY_RIGHT) || i.getKeyDown(Atomic.KEY_D);
+    let up:boolean = i.getKeyDown(Atomic.KEY_UP) || i.getKeyDown(Atomic.KEY_W);
+    let down:boolean = i.getKeyDown(Atomic.KEY_DOWN) || i.getKeyDown(Atomic.KEY_S);
+    let shoot:boolean = i.getKeyDown(Atomic.KEY_SPACE);
+    // let jump:boolean = i.getKeyDown(Atomic.KEY_UP) || i.getKeyDown(Atomic.KEY_SPACE) || i.getKeyDown(Atomic.KEY_W);
 
+    // left/right to move
+    /*
     if (left) {
       leftPos = pos[0] - speed;
       // if (leftPos >= -this.game.halfWidth + 1) {
-      if (leftPos >= -config.levelWidth) {
+      if (leftPos >= -config.levelWidth * Atomic.PIXEL_SIZE) {
         pos[0] = leftPos;
         camera.translate2D([-Atomic.PIXEL_SIZE, 0]);
       }
@@ -151,10 +156,26 @@ class Player extends Atomic.JSComponent {
     if (right) {
       rightPos = pos[0] + speed;
       // if (rightPos <= this.game.halfWidth - 1) {
-      if (leftPos <= config.levelWidth) {
+      if (rightPos <= config.levelWidth * Atomic.PIXEL_SIZE) {
         pos[0] = rightPos;
         camera.translate2D([Atomic.PIXEL_SIZE, 0]);
       }
+    }
+    */
+
+    // left/right to rotate
+    if (left) {
+      this.node.rotate2D(rotationSpeed);
+    }
+
+    if (right) {
+      this.node.rotate2D(-rotationSpeed);
+    }
+
+    // Up for thrust
+    if (up) {
+      pos[0] += speed * Math.cos(rot * Math.PI / 180);
+      pos[1] += speed * Math.sin(rot * Math.PI / 180);
     }
 
     // this.node.position2D = pos;

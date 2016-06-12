@@ -4,8 +4,8 @@ import Bootstrap from "../Modules/SpaceGame/Bootstrap";
 
 const bootstrap = new Bootstrap(
   {
-    width: 600,
-    height: 400,
+    width: 1280,
+    height: 720,
     useRenderPath: false,
     blackAndWhite: false,
     blur: false,

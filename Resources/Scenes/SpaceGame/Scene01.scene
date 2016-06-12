@@ -5,8 +5,8 @@
 	<attribute name="Smoothing Constant" value="50" />
 	<attribute name="Snap Threshold" value="5" />
 	<attribute name="Elapsed Time" value="0" />
-	<attribute name="Next Replicated Node ID" value="382" />
-	<attribute name="Next Replicated Component ID" value="2003" />
+	<attribute name="Next Replicated Node ID" value="387" />
+	<attribute name="Next Replicated Component ID" value="2008" />
 	<attribute name="Next Local Node ID" value="16778496" />
 	<attribute name="Next Local Component ID" value="16777216" />
 	<attribute name="Variables" />
@@ -15,9 +15,6 @@
 	<component type="Octree" id="2" />
 	<component type="DebugRenderer" id="3" />
 	<component type="Renderer2D" id="1976" />
-	<component type="JSComponent" id="2002">
-		<attribute name="ComponentFile" value="JSComponentFile;Components/SpaceGame/Graphics/HUD/Debug.js" />
-	</component>
 	<node id="2">
 		<attribute name="Is Enabled" value="true" />
 		<attribute name="Name" value="Zone" />
@@ -78,7 +75,7 @@
 		<attribute name="Is Enabled" value="true" />
 		<attribute name="Name" value="Player" />
 		<attribute name="Position" value="0 0 0" />
-		<attribute name="Rotation" value="-4.37114e-08 0 1 -0" />
+		<attribute name="Rotation" value="1 0 0 0" />
 		<attribute name="Scale" value="1 1 1" />
 		<attribute name="Variables" />
 		<component type="JSComponent" id="1986">
@@ -118,6 +115,17 @@
 			<attribute name="Layer" value="-2" />
 			<attribute name="Order in Layer" value="-100" />
 			<attribute name="Sprite" value="Sprite2D;Sprites/SpaceGame/Backgrounds/space_background.png" />
+		</component>
+	</node>
+	<node id="384">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="ScoreManager" />
+		<attribute name="Position" value="0 0 0" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<component type="JSComponent" id="2005">
+			<attribute name="ComponentFile" value="JSComponentFile;Components/SpaceGame/Graphics/HUD/Debug.js" />
 		</component>
 	</node>
 </scene>

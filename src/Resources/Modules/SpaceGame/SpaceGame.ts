@@ -112,7 +112,7 @@ class SpaceGame extends Generic2DGame {
     // let size = this.graphics.getMonitorResolution(0);
     // this.graphics.setWindowSize(size[0] / 1.25, size[1] / 1.25);
 
-    // this.graphics.centerWindow();
+    this.graphics.centerWindow();
     // this.graphics.setWindowPosition(0, 0);
 
     // Atomic.print('MAX_FPS=' + this.engine.getMaxFps());

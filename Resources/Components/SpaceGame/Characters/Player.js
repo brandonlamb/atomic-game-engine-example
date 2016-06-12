@@ -84,27 +84,26 @@ var Player = (function (_super) {
         var config = this.game.config;
         var camera = this.game.camera.node;
         var speed = 2.0 * timeStep;
-        var prevPos = this.node.getPosition2D();
-        var pos = [prevPos[0], prevPos[1]];
+        var rotationSpeed = 0.4;
+        var pos = this.node.position2D;
+        var rot = this.node.getRotation2D();
         var rightPos;
         var leftPos;
         var i = this.input;
         var left = i.getKeyDown(Atomic.KEY_LEFT) || i.getKeyDown(Atomic.KEY_A);
         var right = i.getKeyDown(Atomic.KEY_RIGHT) || i.getKeyDown(Atomic.KEY_D);
-        var jump = i.getKeyDown(Atomic.KEY_UP) || i.getKeyDown(Atomic.KEY_SPACE) || i.getKeyDown(Atomic.KEY_W);
+        var up = i.getKeyDown(Atomic.KEY_UP) || i.getKeyDown(Atomic.KEY_W);
+        var down = i.getKeyDown(Atomic.KEY_DOWN) || i.getKeyDown(Atomic.KEY_S);
+        var shoot = i.getKeyDown(Atomic.KEY_SPACE);
         if (left) {
-            leftPos = pos[0] - speed;
-            if (leftPos >= -config.levelWidth) {
-                pos[0] = leftPos;
-                camera.translate2D([-Atomic.PIXEL_SIZE, 0]);
-            }
+            this.node.rotate2D(rotationSpeed);
         }
         if (right) {
-            rightPos = pos[0] + speed;
-            if (leftPos <= config.levelWidth) {
-                pos[0] = rightPos;
-                camera.translate2D([Atomic.PIXEL_SIZE, 0]);
-            }
+            this.node.rotate2D(-rotationSpeed);
+        }
+        if (up) {
+            pos[0] += speed * Math.cos(rot * Math.PI / 180);
+            pos[1] += speed * Math.sin(rot * Math.PI / 180);
         }
         this.node.setPosition2D(pos);
     };

@@ -2,8 +2,8 @@
 require("vendor");
 var Bootstrap_1 = require("../Modules/SpaceGame/Bootstrap");
 var bootstrap = new Bootstrap_1.default({
-    width: 600,
-    height: 400,
+    width: 1280,
+    height: 720,
     useRenderPath: false,
     blackAndWhite: false,
     blur: false,
