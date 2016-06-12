@@ -34,6 +34,7 @@ var Debug = (function (_super) {
     };
     Debug.prototype.update = function (timeStep) {
         var player = this.game.scene.getChild('Player');
+        var playerComp = player;
         var camera = this.game.camera;
         var cameraPos = camera.node.getPosition2D();
         var playerPos = player.getPosition2D();
@@ -42,7 +43,8 @@ var Debug = (function (_super) {
             + ("CAMERA ZOOM: " + camera.getZoom() + "\n")
             + ("PLAYER: " + playerPos + "\n")
             + ("CAMERA LIMIT: " + this.camLimit + "\n")
-            + ("ROTATION: " + rot);
+            + ("ROTATION: " + rot + "\n")
+            + ("CONTACT COUNT: " + playerComp.contactCount);
     };
     return Debug;
 }(Atomic.JSComponent));

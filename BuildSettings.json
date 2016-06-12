@@ -1,12 +1,12 @@
 {
    "MacBuildSettings": {
-      "appName": "Typescript Project Seed",
+      "appName": "SpaceShip",
       "packageName": "",
       "companyName": "",
       "productName": ""
    },
    "WindowsBuildSettings": {
-      "appName": "",
+      "appName": "SpaceGame",
       "packageName": "",
       "companyName": "",
       "productName": ""

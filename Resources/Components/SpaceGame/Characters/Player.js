@@ -5,7 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var Console_1 = require("../../../Modules/Atomic/Console");
+var Console_1 = require('../../../Modules/Atomic/Console');
 var Player = (function (_super) {
     __extends(Player, _super);
     function Player() {
@@ -27,6 +27,8 @@ var Player = (function (_super) {
         this.allowZoom = true;
         this.health = 10;
         this.armor = 10;
+        this.body = null;
+        this.contactCount = 0;
     }
     Player.prototype.start = function () {
         this.input = this.game.input;
@@ -47,6 +49,15 @@ var Player = (function (_super) {
             LEFT: this.input.getScancodeFromKey(Atomic.KEY_A),
             RIGHT: this.input.getScancodeFromKey(Atomic.KEY_D)
         };
+        this.body = this.node.getComponent('RigidBody2D');
+        this.subscribeToEvent('PhysicsBeginContact2D', function (event) {
+            if (event.bodyB == this.body)
+                this.contactCount++;
+        });
+        this.subscribeToEvent('PhysicsEndContact2D', function (event) {
+            if (event.bodyB == this.body)
+                this.contactCount--;
+        });
     };
     Player.prototype.onHit = function () {
         Atomic.print('Player.onHit()');

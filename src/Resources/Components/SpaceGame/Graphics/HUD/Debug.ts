@@ -1,5 +1,6 @@
 'atomic component';
 
+import Player = require("../../Characters/Player");
 import SpaceGame from "../../../../Modules/SpaceGame/SpaceGame";
 import Console from "../../../../Modules/Atomic/Console";
 
@@ -45,6 +46,7 @@ class Debug extends Atomic.JSComponent {
 
   update(timeStep:number):void {
     let player = this.game.scene.getChild('Player');
+    let playerComp:any = player;
     // let camera:Atomic.Camera = <Atomic.Camera>player.getChild('Camera').getComponent('Camera');
     let camera = <Atomic.Camera>this.game.camera;
     let cameraPos = camera.node.getPosition2D();
@@ -56,7 +58,8 @@ class Debug extends Atomic.JSComponent {
       + `CAMERA ZOOM: ${camera.getZoom()}\n`
       + `PLAYER: ${playerPos}\n`
       + `CAMERA LIMIT: ${this.camLimit}\n`
-      + `ROTATION: ${rot}`;
+      + `ROTATION: ${rot}\n`
+      + `CONTACT COUNT: ${playerComp.contactCount}`;
   }
 }
 

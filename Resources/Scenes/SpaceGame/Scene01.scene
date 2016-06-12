@@ -5,8 +5,8 @@
 	<attribute name="Smoothing Constant" value="50" />
 	<attribute name="Snap Threshold" value="5" />
 	<attribute name="Elapsed Time" value="0" />
-	<attribute name="Next Replicated Node ID" value="391" />
-	<attribute name="Next Replicated Component ID" value="2015" />
+	<attribute name="Next Replicated Node ID" value="392" />
+	<attribute name="Next Replicated Component ID" value="2020" />
 	<attribute name="Next Local Node ID" value="16778496" />
 	<attribute name="Next Local Component ID" value="16777216" />
 	<attribute name="Variables" />
@@ -85,7 +85,12 @@
 			<attribute name="Layer" value="1" />
 			<attribute name="Sprite" value="Sprite2D;Sprites/SpaceGame/Ships/spaceship_scarab.png" />
 		</component>
-		<component type="RigidBody" id="2012" />
+		<component type="CollisionShape" id="2016" />
+		<component type="RigidBody" id="2018">
+			<attribute name="Collision Event Mode" value="Always" />
+			<attribute name="Use Gravity" value="false" />
+			<attribute name="Is Kinematic" value="true" />
+		</component>
 		<node id="387">
 			<attribute name="Is Enabled" value="false" />
 			<attribute name="Name" value="Camera" />
@@ -109,6 +114,11 @@
 		<component type="StaticSprite2D" id="1992">
 			<attribute name="Layer" value="1" />
 			<attribute name="Sprite" value="Sprite2D;Sprites/Spinner/star.png" />
+		</component>
+		<component type="CollisionShape" id="2017" />
+		<component type="RigidBody" id="2019">
+			<attribute name="Physics Position" value="-9.49981 -1 0" />
+			<attribute name="Use Gravity" value="false" />
 		</component>
 	</node>
 	<node id="376">

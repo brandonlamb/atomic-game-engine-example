@@ -1,8 +1,8 @@
 'atomic component';
 
 import Vector2 = Atomic.Vector2;
-import SpaceGame from "../../../Modules/SpaceGame/SpaceGame";
-import Console from "../../../Modules/Atomic/Console";
+import SpaceGame from '../../../Modules/SpaceGame/SpaceGame';
+import Console from '../../../Modules/Atomic/Console';
 
 class Player extends Atomic.JSComponent {
   inspectorFields = {
@@ -27,6 +27,9 @@ class Player extends Atomic.JSComponent {
   allowZoom:boolean = true;
   health:number = 10;
   armor:number = 10;
+
+  private body:Atomic.RigidBody2D = null;
+  contactCount:number = 0;
 
   /**
    * @function Player:start
@@ -55,7 +58,21 @@ class Player extends Atomic.JSComponent {
       DOWN: this.input.getScancodeFromKey(Atomic.KEY_S),
       LEFT: this.input.getScancodeFromKey(Atomic.KEY_A),
       RIGHT: this.input.getScancodeFromKey(Atomic.KEY_D)
-    }
+    };
+
+    this.body = <Atomic.RigidBody2D>this.node.getComponent('RigidBody2D');
+
+    this.subscribeToEvent('PhysicsBeginContact2D', function(event) {
+      //if bodyB is our body, so increment contactCount
+      if (event.bodyB == this.body)
+        this.contactCount++;
+    });
+    //subscribe to
+    this.subscribeToEvent('PhysicsEndContact2D', function(event) {
+      //if bodyB is our body, so decrement contactCount
+      if (event.bodyB == this.body)
+        this.contactCount--;
+    });
   }
 
   /**
