@@ -82,10 +82,12 @@ var Player = (function (_super) {
     };
     Player.prototype.moveShip = function (timeStep) {
         var config = this.game.config;
-        var camera = this.game.camera.node;
+        var camera = this.game.camera;
+        var cameraNode = camera.getNode();
         var speed = 2.0 * timeStep;
         var rotationSpeed = 0.4;
         var pos = this.node.position2D;
+        var pos2 = this.node.position2D;
         var rot = this.node.getRotation2D();
         var rightPos;
         var leftPos;
@@ -102,8 +104,19 @@ var Player = (function (_super) {
             this.node.rotate2D(-rotationSpeed);
         }
         if (up) {
-            pos[0] += speed * Math.cos(rot * Math.PI / 180);
-            pos[1] += speed * Math.sin(rot * Math.PI / 180);
+            var levelX = config.levelWidth * Atomic.PIXEL_SIZE;
+            var levelY = config.levelHeight * Atomic.PIXEL_SIZE;
+            var x = pos[0] + speed * Math.cos(rot * Math.PI / 180);
+            var y = pos[1] + speed * Math.sin(rot * Math.PI / 180);
+            var camX = pos2[0] + speed * Math.cos(rot * Math.PI / 180);
+            var camY = pos2[1] + Math.sin(rot * Math.PI / 180);
+            if (x >= -levelX && x <= levelX) {
+                pos[0] = x;
+            }
+            if (y >= -levelY && y <= levelY) {
+                pos[1] = y;
+            }
+            Atomic.print("\nCAMX=" + camX + "\nCAMY=" + camY + "\nPOSX=" + pos[0] + "\nPOSY=" + pos[1]);
         }
         this.node.setPosition2D(pos);
     };
@@ -114,6 +127,15 @@ var Player = (function (_super) {
         if (this.allowMove) {
             this.moveShip(timeStep);
         }
+    };
+    Player.prototype.clamp = function (value, min, max) {
+        if (value < min) {
+            return min;
+        }
+        else if (value > max) {
+            return max;
+        }
+        return value;
     };
     return Player;
 }(Atomic.JSComponent));

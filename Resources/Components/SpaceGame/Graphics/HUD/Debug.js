@@ -33,11 +33,13 @@ var Debug = (function (_super) {
         layout.addChild(this.text);
     };
     Debug.prototype.update = function (timeStep) {
-        var cameraPos = Atomic.game.camera.node.getPosition2D();
-        var player = Atomic.game.scene.getChild('Player');
+        var player = this.game.scene.getChild('Player');
+        var camera = player.getChild('Camera').getComponent('Camera');
+        var cameraPos = camera.node.getPosition2D();
         var playerPos = player.getPosition2D();
         var rot = player.getRotation2D();
         this.text.text = ("CAMERA: " + cameraPos + "\n")
+            + ("CAMERA ZOOM: " + camera.getZoom() + "\n")
             + ("PLAYER: " + playerPos + "\n")
             + ("CAMERA LIMIT: " + this.camLimit + "\n")
             + ("ROTATION: " + rot);

@@ -126,10 +126,12 @@ class Player extends Atomic.JSComponent {
 
   moveShip(timeStep:number):void {
     let config:GameConfig = this.game.config;
-    let camera:Atomic.Node = this.game.camera.node;
+    let camera:Atomic.Camera = <Atomic.Camera>this.game.camera;
+    let cameraNode:Atomic.Node = <Atomic.Node>camera.getNode();
     let speed:number = 2.0 * timeStep;
     let rotationSpeed:number = 0.4;
     let pos:Atomic.Vector2 = this.node.position2D;
+    let pos2:Atomic.Vector2 = this.node.position2D;
     let rot:number = this.node.getRotation2D();
     let rightPos:number;
     let leftPos:number;
@@ -144,24 +146,24 @@ class Player extends Atomic.JSComponent {
 
     // left/right to move
     /*
-    if (left) {
-      leftPos = pos[0] - speed;
-      // if (leftPos >= -this.game.halfWidth + 1) {
-      if (leftPos >= -config.levelWidth * Atomic.PIXEL_SIZE) {
-        pos[0] = leftPos;
-        camera.translate2D([-Atomic.PIXEL_SIZE, 0]);
-      }
-    }
+     if (left) {
+     leftPos = pos[0] - speed;
+     // if (leftPos >= -this.game.halfWidth + 1) {
+     if (leftPos >= -config.levelWidth * Atomic.PIXEL_SIZE) {
+     pos[0] = leftPos;
+     camera.translate2D([-Atomic.PIXEL_SIZE, 0]);
+     }
+     }
 
-    if (right) {
-      rightPos = pos[0] + speed;
-      // if (rightPos <= this.game.halfWidth - 1) {
-      if (rightPos <= config.levelWidth * Atomic.PIXEL_SIZE) {
-        pos[0] = rightPos;
-        camera.translate2D([Atomic.PIXEL_SIZE, 0]);
-      }
-    }
-    */
+     if (right) {
+     rightPos = pos[0] + speed;
+     // if (rightPos <= this.game.halfWidth - 1) {
+     if (rightPos <= config.levelWidth * Atomic.PIXEL_SIZE) {
+     pos[0] = rightPos;
+     camera.translate2D([Atomic.PIXEL_SIZE, 0]);
+     }
+     }
+     */
 
     // left/right to rotate
     if (left) {
@@ -174,15 +176,53 @@ class Player extends Atomic.JSComponent {
 
     // Up for thrust
     if (up) {
-      pos[0] += speed * Math.cos(rot * Math.PI / 180);
-      pos[1] += speed * Math.sin(rot * Math.PI / 180);
+      // pos[0] += speed * Math.cos(rot * Math.PI / 180);
+      // pos[1] += speed * Math.sin(rot * Math.PI / 180);
+
+      let levelX = config.levelWidth * Atomic.PIXEL_SIZE;
+      let levelY = config.levelHeight * Atomic.PIXEL_SIZE;
+      let x = pos[0] + speed * Math.cos(rot * Math.PI / 180);
+      let y = pos[1] + speed * Math.sin(rot * Math.PI / 180);
+
+      let camX = pos2[0] + speed * Math.cos(rot * Math.PI / 180);
+      let camY = pos2[1] + Math.sin(rot * Math.PI / 180);
+
+      if (x >= -levelX && x <= levelX) {
+        pos[0] = x;
+        // camera.translate2D([camX, 0]);
+        // cameraNode.setPosition2D([camX, cameraNode.getPosition2D()[1]]);
+        // cameraNode.setPosition2D([camX / 2, 0]);
+        // camera.setZoom(1);
+      }
+
+      if (y >= -levelY && y <= levelY) {
+        pos[1] = y;
+        // camera.translate2D([x * Atomic.PIXEL_SIZE, 0]);
+      }
+
+      // camera.translate2D([pos[0] * Atomic.PIXEL_SIZE, pos[1] * Atomic.PIXEL_SIZE]);
+
+      // Clamp the camera position to the world bounds while centering the camera around the player
+      // let camX = this.clamp(-player.x + canvas.width / 2, yourWorld.minX, yourWorld.maxX - canvas.width);
+      // let camY = this.clamp(-player.y + canvas.height / 2, yourWorld.minY, yourWorld.maxY - canvas.height);
+
+      // let viewport:Atomic.Viewport = this.game.viewport;
+      // let camX = this.clamp(-pos[0] + viewport.getWidth() / 2, -levelX, levelX - viewport.getWidth());
+      // let camY = this.clamp(-pos[1] + viewport.getHeight() / 2, -levelY, levelY - viewport.getHeight());
+      Atomic.print(`\nCAMX=${camX}\nCAMY=${camY}\nPOSX=${pos[0]}\nPOSY=${pos[1]}`);
+
+      // camera.setPosition2D([-camX, camY]);
+      // camera.translate2D(camX, camY);
+      // camera.translate2D(pos[0] * Atomic.PIXEL_SIZE, 0);
     }
 
     // this.node.position2D = pos;
     this.node.setPosition2D(pos);
+    // this.node.translate2D(pos);
 
     // pos.y += -0.1;
     // camera.setPosition2D(pos);
+    // camera.translate2D([pos[0] * Atomic.PIXEL_SIZE, pos[1] * Atomic.PIXEL_SIZE]);
 
     // let pos1:Atomic.Vector2 = camera.getWorldPosition2D();
     // let pos2:Atomic.Vector2 = camera.getPosition2D();
@@ -201,6 +241,16 @@ class Player extends Atomic.JSComponent {
     if (this.allowMove) {
       this.moveShip(timeStep);
     }
+  }
+
+  private clamp(value:number, min:number, max:number):number {
+    if (value < min) {
+      return min;
+    } else if (value > max) {
+      return max;
+    }
+
+    return value;
   }
 }
 
