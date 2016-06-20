@@ -156,9 +156,12 @@ var Player = (function (_super) {
         }
     };
     Player.prototype.spawnBullet = function (pos, isPlayer) {
-        var bulletNode = this.game.scene.createChild('Bullet');
-        var bullet = bulletNode.createJSComponent('Components/SpaceGame/Bullet.js');
-        bullet.init(isPlayer, pos, this.node.rotation2D);
+        var bulletNode = this.node.getChild('Bullets').getChild('Bullet');
+        var bullet = bulletNode.getComponent('RigidBody2D');
+        var x = pos[0] + 1.5 * Math.cos(bulletNode.rotation2D * Math.PI / 180);
+        var y = pos[1] + 1.5 * Math.sin(bulletNode.rotation2D * Math.PI / 180);
+        bullet.angularVelocity = 1;
+        bullet.applyForce(pos, [1, 1], true);
     };
     return Player;
 }(Atomic.JSComponent));

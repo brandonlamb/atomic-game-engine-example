@@ -226,9 +226,18 @@ class Player extends Atomic.JSComponent {
   }
 
   private spawnBullet(pos:Atomic.Vector2, isPlayer:boolean):void {
-    let bulletNode = this.game.scene.createChild('Bullet');
-    let bullet = bulletNode.createJSComponent('Components/SpaceGame/Bullet.js');
-    bullet.init(isPlayer, pos, this.node.rotation2D);
+    // let bulletNode = this.game.scene.createChild('Bullet');
+    // let bullet = bulletNode.createJSComponent('Components/SpaceGame/Bullet.js');
+    // bullet.init(isPlayer, pos, this.node.rotation2D);
+    let bulletNode = <Atomic.Node>this.node.getChild('Bullets').getChild('Bullet');
+    let bullet = <Atomic.RigidBody2D>bulletNode.getComponent('RigidBody2D');
+
+    let x = pos[0] + 1.5 * Math.cos(bulletNode.rotation2D * Math.PI / 180);
+    let y = pos[1] + 1.5 * Math.sin(bulletNode.rotation2D * Math.PI / 180);
+
+    bullet.angularVelocity = 1;
+    bullet.applyForce(pos, [1, 1], true);
+
   }
 }
 
